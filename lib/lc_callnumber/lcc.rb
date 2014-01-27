@@ -6,6 +6,7 @@ module LCCallNumber
   @transformer = Transform.new
   
   def self.parse(i)
+    return UnparseableCallNumber.new(i) if i.nil?
     i.chomp!
     i.strip!
     orig = i

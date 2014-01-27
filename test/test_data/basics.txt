@@ -1,0 +1,25 @@
+#Tab-delimited file, exported from https://docs.google.com/spreadsheet/ccc?key=0AvHn-9AM-38ldE5TYjFvWFFTdnU5emltMEhuQzEyRnc#gid=0								
+# String	Letter(s)	Number	Doon1	Cutter1	Doon2	Other,Cutters	PubYear	Rest
+A1	A	1						
+A1 .C2	A 	1		C2				
+A1 C2	A	1		C2				
+A10.4	A	10.4						
+A10.4 C345	A 	10.4		C345				
+A1 1990	A	1					1990	
+A 1 C22	A	1		C22				
+BF 173 .F889 F92	BF	173		F889		F92		
+HD7123 .A5 1970 b	HD	7123		A5			1970	b
+PJ5054.B5N44 I83	PJ	5054		B5		N44,I83		
+DA 690 .B8 A3 v.25	DA	690		B8		A3		v.25
+PN 1995.9 .N3 N75 1970	PN	1995.9		N3		N75	1970	
+D570.3 28th .P96	D	570.3	28TH	P96				
+UA704 .C9 12 th R89	UA	704		C9	12th	R89		
+E517.5 21st .A54	E	517.5	21st	A54				
+D761.1 .1st L36	D	761.1	1st	L36				
+G 9801 .A4 s250 .G4 ST5-8/11	G	9801		A4		S250,G4		ST5-8/11
+HD 8039 .R52 I4 I42	HD	8039		R52		I4,I42		
+ND 623 .L58 A43 1970	ND	623		L58		A43	1970	
+DK265.8.L4 L573	DK	265.8		L4		L573		
+A1 1888 .B2 1990	A	1	1888	B2			1990	
+A1 B2 1888 1990	A	1		B2	1888		1990	
+A1 1888 B2 12th	A	1	1888	B2	12TH			

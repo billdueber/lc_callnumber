@@ -53,7 +53,7 @@ module LCCallNumber
     }
     
     rule(:doon) {
-      digits.as(:digits) >> suffix.as(:suffix) |
+      dot? >> digits.as(:digits) >> space? >> suffix.as(:suffix) |
       digits.as(:digits)
     }
     rule(:doon?) { doon.maybe }

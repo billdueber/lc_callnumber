@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = LCCallNumber::VERSION
   spec.authors       = ["Bill Dueber"]
   spec.email         = ["bill@dueber.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Work with  LC Call (Classification) Numbers}
+  spec.summary       = %q{Work with  LC Call (Classification) Numbers, including an attempt to parse them out from a string to their component parts}
+  spec.homepage      = "https://github.com/billdueber/lc_callnumber"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
