@@ -142,11 +142,12 @@ module LCCallNumber
   
   
   class CallNumber
-    
+        
     attr_accessor :letters, :digits, :doon1, :firstcutter, :doon2, 
                   :extra_cutters, :year, :rest
     attr_accessor :original_string
-                  
+    
+                      
     def initialize(lead, fcset=nil, ec=[], year=nil, rest=nil)
       @letters = lead.letters
       @digits  = lead.digits.to_num
@@ -195,6 +196,7 @@ module LCCallNumber
 
     def initialize(str)
       self.original_string = str
+      self.extra_cutters = []
     end
       
     def valid? 
