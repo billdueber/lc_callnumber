@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/billdueber/lc_callnumber.png)](http://travis-ci.org/billdueber/lc_callnumber)
+
 # LCCallNumber
 
 Very simple attempt to work with Library of Congress Call Numbers (_nee_ Classification Numbers).
