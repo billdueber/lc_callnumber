@@ -98,11 +98,11 @@ module LCCallNumber
     rule(:intpart=>simple(:i), :fractpart=>simple(:f)) { Decimal.new(i,f) }
     rule(:intpart=>simple(:i)) { Decimal.new(i,nil) }
     
-    rule(:alpha=>simple(:a), :numbers=>simple(:n)) { @a = Lead.new(a,n) }
+    rule(:alpha=>simple(:a), :numbers=>simple(:n)) { @a = Lead.new(a.to_s,n) }
     rule(:digits=>simple(:d), :suffix=>simple(:s)) {"#{d}#{s}"}
     rule(:digits=>simple(:d)) { d.to_s }
-    rule(:doon => simple(:d)) { d.strip }
-    rule(:cutter => {:dot=>simple(:dot), :letter=>simple(:l), :digits=>simple(:d)}) { Cutter.new(l,d, dot)}
+    rule(:doon => simple(:d)) { d.to_s.strip }
+    rule(:cutter => {:dot=>simple(:dot), :letter=>simple(:l), :digits=>simple(:d)}) { Cutter.new(l.to_s,d.to_s, !(dot.nil?))}
     
     rule(:doon1=>simple(:d1), :doon2=>simple(:d2), :cutter=>simple(:c)) { FirstCutterSet.new(d1, c, d2)}
     rule(:yeardigits => simple(:y)) { y.nil? ? nil : y.to_s.strip}
