@@ -102,8 +102,8 @@ module LCCallNumber
   class Cutter
     attr_accessor :letter, :digits, :dot
     def initialize(l,d, dot=nil)
-      @letter = l
-      @digits = d
+      @letter = l.to_s
+      @digits = d.to_i
       @dot = !dot.nil?
     end
     
@@ -142,13 +142,14 @@ module LCCallNumber
   
   
   class CallNumber
-    
+        
     attr_accessor :letters, :digits, :doon1, :firstcutter, :doon2, 
                   :extra_cutters, :year, :rest
     attr_accessor :original_string
-                  
+    
+                      
     def initialize(lead, fcset=nil, ec=[], year=nil, rest=nil)
-      @letters = lead.letters
+      @letters = lead.letters.to_s.upcase
       @digits  = lead.digits.to_num
       
       if fcset
