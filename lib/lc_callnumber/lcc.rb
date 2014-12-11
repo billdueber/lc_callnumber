@@ -196,6 +196,7 @@ module LCCallNumber
 
     def initialize(str)
       self.original_string = str
+      self.extra_cutters = []
     end
       
     def valid? 
