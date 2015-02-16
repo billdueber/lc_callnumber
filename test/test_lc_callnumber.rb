@@ -22,11 +22,27 @@ describe "Basics" do
       assert_equal other_cutters.to_s.split(/\s*,\s*/), lc.extra_cutters.map(&:to_s), "#{orig} -> extra_cutters #{lc.inspect}"
       assert_equal pubyear.to_s, lc.year.to_s,  "#{orig} -> year #{lc.inspect}"
       assert_equal rest.to_s, lc.rest.to_s,  "#{orig} -> rest #{lc.inspect}"
-      
+
     end
-    
+
   end
 end
-      
-      
-      
+
+describe "Sorting" do
+  it "sorts call numbers properly" do
+    a1 = LCCallNumber.parse("A 50")
+    a2 = LCCallNumber.parse("A 7")
+    q1 = LCCallNumber.parse("QA 500")
+    q2 = LCCallNumber.parse("QA 500.M500")
+    q3 = LCCallNumber.parse("QA 500.M500 T59")
+    q4 = LCCallNumber.parse("QA 500.M500 T60")
+    assert (a1 <=> a1) ==  0 # a1 is a1
+    assert (a1 <=> a2) ==  1 # a1 > a2
+    assert (a2 <=> q1) == -1 # a2 < q1
+    assert (q1 <=> q2) == -1 # q1 < q2
+    assert (q2 <=> q3) == -1 # q2 < q3
+    assert (q3 <=> q3) ==  0 # q3 is q3
+    assert (q3 <=> q4) == -1 # q3 < q4
+    # Is there some way to put some test numbers into an array, sort it, and compare the original and sorted arrays?
+  end
+end
