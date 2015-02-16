@@ -215,6 +215,10 @@ module LCCallNumber
           if firstcutter_cmp == 0
             firstcutter_cmp = firstcutter.digits <=> other.firstcutter.digits
           end
+          # If that didn't help, if other has an extra_cutter, it is last
+          if firstcutter_cmp == 0
+            firstcutter_cmp = -1 if (extra_cutters.empty? && ! other.extra_cutters.empty?)
+          end
         else
           # self has a firstcutter but other doesn't, so other is first
           firstcutter_cmp = 1
@@ -234,32 +238,27 @@ module LCCallNumber
       doon2_cmp = doon2 <=> other.doon2
       return doon2_cmp unless doon2_cmp == 0
 
-      # The extra cutters are in an array, so we need to compare each.
-      # But the hell with it, for now let's just compare the first
-      # I'm running out of energy.  Who invented this mishegas?
-      if ! extra_cutters.empty?
-        # self has extra_cutters
-        if ! extra_cutters.empty?
-          # Both have extra_cutters!  Compare the first one, then call it a day.
-          # TODO: Compare the whole array of the stupid things.
-          # Compare the letter
-          extra_cutters_cmp = extra_cutters[0].letter <=> other.extra_cutters[0].letter
-          # If that didn't help, compare the digits
-          if extra_cutters_cmp == 0
-            extra_cutters_cmp = extra_cutters[0].digits <=> other.extra_cutters[0].digits
+      # The extra_cutters are an array, so we need to compare each.
+      # Surely there is an easier way to do this?
+      extra_cutters_cmp = 0
+      # STDERR.puts extra_cutters
+      extra_cutters.each_index do |i|
+        if extra_cutters_cmp == 0 # Stop when we need go no further
+          # First, compare the letter
+          if other.extra_cutters[i]
+            extra_cutters_cmp = extra_cutters[i].letter <=> other.extra_cutters[i].letter
+            # If that didn't help, compare the digits
+            if extra_cutters_cmp == 0
+              extra_cutters_cmp = extra_cutters[i].digits <=> other.extra_cutters[i].digits
+            end
+            # If that didn't help, if self has no more extra_cutters but other does, self is first
+            if extra_cutters_cmp == 0
+              extra_cutters_cmp = -1 if (extra_cutters[i+1].nil? && other.extra_cutters[i+1])
+            end
+          else
+            # other has no extra_cutter, so it is first
+            extra_cutters_cmp = 1
           end
-        else
-          # self has extra_cutters but other doesn't, so other is first
-          extra_cutters_cmp = 1
-        end
-      else
-        # self has no extra_cutters
-        if ! other.extra_cutters.empty?
-          # other does, so it comes last
-          extra_cutters_cmp = -1
-        else
-          # Neither has any, so carry on
-          extra_cutters_cmp = 0
         end
       end
       return extra_cutters_cmp unless extra_cutters_cmp == 0

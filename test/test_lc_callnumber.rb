@@ -36,6 +36,8 @@ describe "Sorting" do
     q2 = LCCallNumber.parse("QA 500.M500")
     q3 = LCCallNumber.parse("QA 500.M500 T59")
     q4 = LCCallNumber.parse("QA 500.M500 T60")
+    q5 = LCCallNumber.parse("QA 500.M500 T60 A1")
+    q6 = LCCallNumber.parse("QA 500.M500 T60 Z54")
     assert (a1 <=> a1) ==  0 # a1 is a1
     assert (a1 <=> a2) ==  1 # a1 > a2
     assert (a2 <=> q1) == -1 # a2 < q1
@@ -43,6 +45,8 @@ describe "Sorting" do
     assert (q2 <=> q3) == -1 # q2 < q3
     assert (q3 <=> q3) ==  0 # q3 is q3
     assert (q3 <=> q4) == -1 # q3 < q4
+    assert (q4 <=> q5) == -1 # q4 < q5
+    assert (q5 <=> q6) == -1 # q5 < q6
     # Is there some way to put some test numbers into an array, sort it, and compare the original and sorted arrays?
   end
 end
