@@ -205,13 +205,63 @@ module LCCallNumber
       doon1_cmp = doon1 <=> other.doon1
       return doon1_cmp unless doon1_cmp == 0
 
-      firstcutter_cmp = firstcutter <=> other.firstcutter
+      # Cutters have letters and numbers, which we need to compare separately.
+      if firstcutter
+        if other.firstcutter
+          # Both have firstcutters!  Hurrah!
+          # Compare the letter
+          firstcutter_cmp = firstcutter.letter <=> other.firstcutter.letter
+          # If that didn't help, compare the digits
+          if firstcutter_cmp == 0
+            firstcutter_cmp = firstcutter.digits <=> other.firstcutter.digits
+          end
+        else
+          # self has a firstcutter but other doesn't, so other is first
+          firstcutter_cmp = 1
+        end
+      else
+        # self has no firstcutter
+        if other.firstcutter
+          # other does, so it comes last
+          firstcutter_cmp = -1
+        else
+          # Neither has one, so carry on
+          firstcutter_cmp = 0
+        end
+      end
       return firstcutter_cmp unless firstcutter_cmp == 0
 
       doon2_cmp = doon2 <=> other.doon2
       return doon2_cmp unless doon2_cmp == 0
 
-      extra_cutters_cmp = extra_cutters <=> other.extra_cutters
+      # The extra cutters are in an array, so we need to compare each.
+      # But the hell with it, for now let's just compare the first
+      # I'm running out of energy.  Who invented this mishegas?
+      if ! extra_cutters.empty?
+        # self has extra_cutters
+        if ! extra_cutters.empty?
+          # Both have extra_cutters!  Compare the first one, then call it a day.
+          # TODO: Compare the whole array of the stupid things.
+          # Compare the letter
+          extra_cutters_cmp = extra_cutters[0].letter <=> other.extra_cutters[0].letter
+          # If that didn't help, compare the digits
+          if extra_cutters_cmp == 0
+            extra_cutters_cmp = extra_cutters[0].digits <=> other.extra_cutters[0].digits
+          end
+        else
+          # self has extra_cutters but other doesn't, so other is first
+          extra_cutters_cmp = 1
+        end
+      else
+        # self has no extra_cutters
+        if ! other.extra_cutters.empty?
+          # other does, so it comes last
+          extra_cutters_cmp = -1
+        else
+          # Neither has any, so carry on
+          extra_cutters_cmp = 0
+        end
+      end
       return extra_cutters_cmp unless extra_cutters_cmp == 0
 
       year_cmp = year <=> other.year
