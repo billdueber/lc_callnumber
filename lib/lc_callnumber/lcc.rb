@@ -213,7 +213,8 @@ module LCCallNumber
           firstcutter_cmp = firstcutter.letter <=> other.firstcutter.letter
           # If that didn't help, compare the digits
           if firstcutter_cmp == 0
-            firstcutter_cmp = firstcutter.digits <=> other.firstcutter.digits
+            # Compare numbers as strings, because S43 < S298
+            firstcutter_cmp = firstcutter.digits.to_s <=> other.firstcutter.digits.to_s
           end
           # If that didn't help, if other has an extra_cutter, it is last
           if firstcutter_cmp == 0
@@ -249,7 +250,8 @@ module LCCallNumber
             extra_cutters_cmp = extra_cutters[i].letter <=> other.extra_cutters[i].letter
             # If that didn't help, compare the digits
             if extra_cutters_cmp == 0
-              extra_cutters_cmp = extra_cutters[i].digits <=> other.extra_cutters[i].digits
+              # Compare numbers as strings, because S43 < S298
+              extra_cutters_cmp = extra_cutters[i].digits.to_s <=> other.extra_cutters[i].digits.to_s
             end
             # If that didn't help, if self has no more extra_cutters but other does, self is first
             if extra_cutters_cmp == 0
