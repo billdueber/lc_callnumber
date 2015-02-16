@@ -32,7 +32,7 @@ For purposes of this class, an LC Call Number consists of the following parts. O
 
 * __Letter(s).__ One or more letters
 * __Digit(s).__ One or more digits, optionally with a decimal point. 
-* __Doon1 (_Date Or Other Number_)__. Relatively rare as these things go, a DOON is used to represent the date the work is _about_ (as opposed to, say, the year it was published) or, in some cases, an identifier for an army division or group (say, "12th" for the US Army Twelfth Infantry). 
+* __Doon1 (_Date Or Other Number_)__. [Note: no one but me calls it a 'doon', but I needed a term and there wasn't another]. Relatively rare as these things go, a DOON is used to represent the date the work is _about_ (as opposed to, say, the year it was published) or, in some cases, an identifier for an army division or group (say, "12th" for the US Army Twelfth Infantry). 
 * __First cutter__. The first "Cutter Number" consisting of a letter followed by one or more digits. The first cutter is always supposed to be preceded by a dot, but, you know, isn't always.
 * __Doon2__. Another date or other number
 * __"Extra" Cutters__. The 2nd through Nth Cutter numbers, lumped together because we don't have to worry about them getting interspersed with doons.
