@@ -9,7 +9,6 @@ Includes simple getters/setters and a PEG parser.
 ## Things that aren't yet done
 
 * Normalization: create a string that can be compared with other normalized strings to correctly order the call numbers
-* Implement `<=>` so call number object can be compared.
 * Much better testing
 
 
@@ -30,20 +29,21 @@ The OCLC has [a page explaining how LC Call Numbers are composed](http://www.ocl
 
 For purposes of this class, an LC Call Number consists of the following parts. Only the first two are required; everything else is optional.
 
-* __Letter(s).__ One or more letters
-* __Digit(s).__ One or more digits, optionally with a decimal point. 
-* __Doon1 (_Date Or Other Number_)__. [Note: no one but me calls it a 'doon', but I needed a term and there wasn't another]. Relatively rare as these things go, a DOON is used to represent the date the work is _about_ (as opposed to, say, the year it was published) or, in some cases, an identifier for an army division or group (say, "12th" for the US Army Twelfth Infantry). 
-* __First cutter__. The first "Cutter Number" consisting of a letter followed by one or more digits. The first cutter is always supposed to be preceded by a dot, but, you know, isn't always.
-* __Doon2__. Another date or other number
-* __"Extra" Cutters__. The 2nd through Nth Cutter numbers, lumped together because we don't have to worry about them getting interspersed with doons.
-* __Year__. The year of publication
-* __"Rest"__. Everything and anything else. 
+* __Letter(s).__ One or more letters.
+* __Digit(s).__ One or more digits, optionally with a decimal point.
+* __Doon1 (_Date Or Other Number_)__. [Note: no one but me calls it a 'doon', but I needed a term and there wasn't another]. Relatively rare as these things go, a DOON is used to represent the date the work is _about_ (as opposed to, say, the year it was published) or, in some cases, an identifier for an army division or group (say, "12th" for the US Army Twelfth Infantry).
+* __First Cutter__. The first "Cutter number," consisting of a letter followed by one or more digits. The first Cutter is always supposed to be preceded by a dot, but, you know, isn't always.
+* __Doon2__. Another date or other number.
+* __"Extra" Cutters__. The 2nd through nth Cutter numbers, lumped together because we don't have to worry about them getting interspersed with doons.
+* __Year__. The year of publication.
+* __"Rest"__. Everything and anything else.
+
 
 ## Usage
 
 In general, you won't be building these things up by hand; you'll try to parse them.
 
-Note that in the case below, while in theory this could be a callnumber with a single cutter followed by a doon2 and no year, we presume the '1990' is a year and don't call it a doon.
+Note that in the case below, while in theory this could be a callnumber with a single Cutter followed by a doon2 and no year, we presume the '1990' is a year and don't call it a doon.
 
 ~~~ruby
 
@@ -60,6 +60,10 @@ lc.rest      #=> nil
 
 lc = LCCallNumber.parse('A .B3') #=> LCCallNumber::UnparseableCallNumber
 lc.valid? #=> false
+
+a = LCCallNumber.parse("B 528.S43")
+b = LCCallNumber.parse("B 528.S298")
+a <=> b # -1
 
 ~~~
 
@@ -79,13 +83,10 @@ Or install it yourself as:
     $ gem install lc_callnumber
 
 
-
-
-
 ## Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+5. Create new pull request

@@ -29,24 +29,41 @@ describe "Basics" do
 end
 
 describe "Sorting" do
-  it "sorts call numbers properly" do
-    a1 = LCCallNumber.parse("A 50")
-    a2 = LCCallNumber.parse("A 7")
-    q1 = LCCallNumber.parse("QA 500")
-    q2 = LCCallNumber.parse("QA 500.M500")
-    q3 = LCCallNumber.parse("QA 500.M500 T59")
-    q4 = LCCallNumber.parse("QA 500.M500 T60")
-    q5 = LCCallNumber.parse("QA 500.M500 T60 A1")
-    q6 = LCCallNumber.parse("QA 500.M500 T60 Z54")
-    assert (a1 <=> a1) ==  0 # a1 is a1
-    assert (a1 <=> a2) ==  1 # a1 > a2
-    assert (a2 <=> q1) == -1 # a2 < q1
-    assert (q1 <=> q2) == -1 # q1 < q2
-    assert (q2 <=> q3) == -1 # q2 < q3
-    assert (q3 <=> q3) ==  0 # q3 is q3
-    assert (q3 <=> q4) == -1 # q3 < q4
-    assert (q4 <=> q5) == -1 # q4 < q5
-    assert (q5 <=> q6) == -1 # q5 < q6
-    # Is there some way to put some test numbers into an array, sort it, and compare the original and sorted arrays?
+  a1 = LCCallNumber.parse("A 50")
+  a2 = LCCallNumber.parse("A 7")
+  b1 = LCCallNumber.parse("B 528.S43")
+  b2 = LCCallNumber.parse("B 528.S298")
+  q1 = LCCallNumber.parse("QA 500")
+  q2 = LCCallNumber.parse("QA 500.M500")
+  q3 = LCCallNumber.parse("QA 500.M500 T59")
+  q4 = LCCallNumber.parse("QA 500.M500 T60")
+  q5 = LCCallNumber.parse("QA 500.M500 T60 A1")
+  q6 = LCCallNumber.parse("QA 500.M500 T60 Z54")
+  it "knows call numbers equal themselves" do
+    assert (a1 <=> a1) ==  0 # A == A (very Aristotelian)
+  end
+  it "sorts first letters properly" do
+    assert (a2 <=> q1) == -1 # A < Q
+  end
+  it "sorts first digits properly" do
+    assert (a1 <=> a2) ==  1 # A 50 > A 7
+  end
+  it "sorts when one item has no Cutter" do
+    assert (q1 <=> q2) == -1 # QA 500 < QA 500.M500
+  end
+  it "sorts first Cutters properly" do
+    assert (b1 <=> b2) ==  1 # S43 > S298
+  end
+  it "sorts when one item has a Cutter, one an extra Cutter" do
+    assert (q2 <=> q3) == -1 # M500 < M500 T59
+  end
+  it "sorts properly on second Cutters" do
+    assert (q3 <=> q4) == -1 # T59 < T60
+  end
+  it "sorts when one item has two Cutters, one has three" do
+    assert (q4 <=> q5) == -1 # M500 T60 < M500 T60 A1
+  end
+  it "sorts properly on third Cutters" do
+    assert (q5 <=> q6) == -1 # A1 < Z54
   end
 end
