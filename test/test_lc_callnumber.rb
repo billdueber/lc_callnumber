@@ -66,4 +66,7 @@ describe "Sorting" do
   it "sorts properly on third Cutters" do
     assert (q5 <=> q6) == -1 # A1 < Z54
   end
+  it "handles unparseable call numbers" do
+    assert ((LCCallNumber.parse("759.11 CAS DUV") <=> LCCallNumber.parse("ND 249 C33 A4 1980")) == 2)
+  end
 end
